@@ -1,5 +1,6 @@
 from flask import Blueprint, redirect, jsonify
 import pandas as pd
+from utils import response_code
 
 
 index_info_bp = Blueprint("index_info_bp", __name__, url_prefix="/index")
@@ -9,22 +10,22 @@ index_info_bp = Blueprint("index_info_bp", __name__, url_prefix="/index")
 def index_pe_value(index_code):
     """获取指数当前的PE"""
     col_name = "当前PE"
-    read_flag, date_list, pe_list = read_datas(index_code, col_name)
+    read_flag, index_name, date_list, pe_list = read_datas(index_code, col_name)
     if not read_flag:
-        return jsonify(errno=601, errmsg="指数代码输入错误")
+        return jsonify(errno=response_code.invalid_index_code, errmsg="指数代码输入错误")
 
-    return jsonify(errno=0, errmsg="获取成功", date=date_list, price=pe_list)
+    return jsonify(errno=response_code.success, errmsg="获取成功", name=index_name, date=date_list, pe=pe_list)
 
 
 @index_info_bp.route("/<string:index_code>/price")
 def index_price(index_code):
     """获取指数的价格"""
     col_name = "收盘价"
-    read_flag, date_list, price_list = read_datas(index_code, col_name)
+    read_flag, index_name, date_list, price_list = read_datas(index_code, col_name)
     if not read_flag:
-        return jsonify(errno=601, errmsg="指数代码输入错误")
+        return jsonify(errno=response_code.invalid_index_code, errmsg="指数代码输入错误")
 
-    return jsonify(errno=0, errmsg="获取成功", date=date_list, price=price_list)
+    return jsonify(errno=response_code.success, errmsg="获取成功", name=index_name, date=date_list, price=price_list)
 
 
 def read_datas(index_code, col_name):
@@ -32,21 +33,13 @@ def read_datas(index_code, col_name):
 
     index_name = convert_index_code_to_name(index_code)
     if not check_index_code(index_name):
-        return False, None, None
+        return False, None, None, None
 
     filename = f"datas/{index_name}.csv"
     dataframe = pd.read_csv(filename, encoding='gbk')
     date_list = dataframe["日期"].tolist()
     price_list = dataframe[col_name].to_list()
-    return True, date_list, price_list
-
-
-def check_index_code(index_name):
-    """判断指数名称是否正确"""
-    if index_name is None:
-        return False
-    return True
-
+    return True, index_name, date_list, price_list
 
 def convert_index_code_to_name(index_code):
     """把指数代码转成指数名称"""
@@ -75,3 +68,10 @@ def convert_index_code_to_name(index_code):
         print("请输入正确的指数代码")
         return None
     return index_name_code_dict[index_code]
+
+
+def check_index_code(index_name):
+    """判断指数名称是否正确"""
+    if index_name is None:
+        return False
+    return True
