@@ -67,6 +67,8 @@ def convert_index_code_to_name(index_code):
     if index_code not in code_list:
         print("请输入正确的指数代码")
         return None
+    if index_code is None:
+        return index_name_code_dict.values()
     return index_name_code_dict[index_code]
 
 

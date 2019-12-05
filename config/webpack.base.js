@@ -29,16 +29,25 @@ var config = {
             },
             {
                 test: /\.vue$/,
-                loader: "vue-loader",
-                options: {
-                    loaders: {
-                        css: ExtractTextPlugin.extract({
-                            use: "css-loader",
-                            fallback: "vue-style-loader"
-                        })
+                use: [
+                    {
+                        loader: "vue-loader",
+                        options: {
+                            loaders: {
+                                css: ExtractTextPlugin.extract({
+                                    use: "css-loader",
+                                    fallback: "vue-style-loader"
+                                })
+                            }
+                        }
+                    },
+                    {
+                        loader: "iview-loader",
+                        options: {
+                            prefix: false
+                        }
                     }
-                }
-                
+            ]
             },
             {
                 test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
