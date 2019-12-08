@@ -6,6 +6,7 @@ Vue.use(VueRouter);
 
 
 import dashboard from './components/dashboard/dashboard.vue';
+import fullInfoIndex from './components/FullInfoIndex/FullInfoIndex.vue';
 
 const routes = [
     {
@@ -13,10 +14,14 @@ const routes = [
         component: dashboard
     },
     {
+        path: "/fullInfoIndex",
+        component: fullInfoIndex
+    },
+    {
         path: "/",
         component: dashboard
     }
-]
+];
 
 var routers = new VueRouter({
     routes,
