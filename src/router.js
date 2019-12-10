@@ -4,7 +4,6 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 
-
 import Dashboard from './components/dashboard/dashboard.vue';
 import SHIndex50 from './components/SHIndex50/SHIndex50.vue';
 import Index100 from './components/Index100/Index100.vue';
@@ -14,11 +13,13 @@ import Index500 from './components/Index500/Index500.vue';
 import Index1000 from './components/Index1000/Index1000.vue';
 import MediumSmallIndex from './components/MeduimSmallIndex/MeduimSmallIndex.vue';
 import GEMIndex from './components/GEMIndex/GEMIndex.vue';
+import BonusIndex from './components/BonusIndex/BonusIndex.vue';
 import BankIndex from './components/BankIndex/BankIndex.vue';
 import IndexComsume from './components/IndexComsume/IndexComsume.vue';
 import FullMedicineIndex from './components/FullMedicineIndex/FullMedicineIndex.vue';
 import PensionIndustryIndex from './components/PensionIndustryIndex/PensionIndustryIndex.vue';
 import FullInfoIndex from './components/FullInfoIndex/FullInfoIndex.vue';
+import IndexMedia from './components/IndexMedia/IndexMedia.vue';
 import FullComsueIndex from './components/FullComsumeIndex/FullComsumeIndex.vue';
 import EnvironmentIndex from './components/EnvironmentIndex/EnvironmentIndex.vue';
 import MalitaryIndex from './components/MilitaryIndex/MilitaryIndex.vue';
@@ -58,7 +59,7 @@ const routes = [
         component: MediumSmallIndex
     },
     {
-        path: "/000932",
+        path: "/000932", // 中证消费
         component: IndexComsume
     },
     {
@@ -66,8 +67,8 @@ const routes = [
         component:GEMIndex
     },
     {
-        path: "/000993", // 全指信息
-        component: FullInfoIndex
+        path: "/000922", // 中证红利
+        component: BonusIndex
     },
     {
         path: "/000991", // 全指医药
@@ -82,11 +83,19 @@ const routes = [
         component: BankIndex
     },
     {
+        path: "/000993", // 全指信息
+        component: FullInfoIndex
+    },
+    {
+        path: "/399971",
+        component: IndexMedia
+    },
+    {
         path: "/000989", // 全指消费
         component: FullComsueIndex
     },
     {
-        path: "/399975",
+        path: "/399975", // 证券公司
         component: SecurityCompany
     },
     {

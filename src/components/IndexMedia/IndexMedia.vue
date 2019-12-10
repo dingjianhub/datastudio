@@ -15,7 +15,7 @@
         </div>
         
         <hr>
-        <div class="security-company"></div>
+        <div class="index-media"></div>
     </div>
 </template>
 
@@ -37,10 +37,7 @@ import {   PEChart,
 
 export default {
     data() {
-        return {
-            indexCode: "399975",
-            selectorName: ".security-company",
-            }
+        return {indexCode: "399971", selectorName: ".index-media"}
     },
     components:{
         Header,
@@ -108,7 +105,7 @@ export default {
     font-size: 20px;
     padding: 20px 0;
     /* margin: 5px 0; */
-    border: 1px dotted #c0b7b7;
+    border: 1px dotted #b7c0b9;
     color: #0b2649
 }
 .common-btn-item:hover{
@@ -118,7 +115,7 @@ export default {
     font-weight: bold;
 }
 
-.security-company {
+.index-media {
     background: gainsboro;
     width: 80%;
     height: 800px;

@@ -12,6 +12,12 @@
         <ul class="high-index-group" v-for="item in highIndex" :key="item.code">
             <li class="high-index-group-item"><a :href="'#/' + item.code" class="group-item-link">{{item.name}}</a></li>
         </ul>
+        <label class="index-group-content">温度指标</label>
+        <ul class="temperatures-index" >
+            <li class="temperatures-index-item"><a href="#" class="group-item-link">北向资金</a></li>
+            <li class="temperatures-index-item"><a href="#" class="group-item-link">市场成交量</a></li>
+            <li class="temperatures-index-item"><a href="#" class="group-item-link">新增投资者</a></li>
+        </ul>
     </div>
 </template> 
 
@@ -43,7 +49,6 @@ export default {
     width: 20%;
     background-color: #cfd2d5
 }
-
 .index-group-content{
     /* background-color: #1e9407 */
     font-size: 22px;
@@ -52,7 +57,6 @@ export default {
 .low-index-group{
     background-color: #1e9407
 }
-
 .low-index-group-item {
     border-bottom: 1px dotted #cfd2d5;
     cursor: pointer;
@@ -61,7 +65,6 @@ export default {
 .low-index-group-item:hover{
     background-color: #fff;
 }
-
 .mid-index-group{
     background-color: #9c9e25
 }
@@ -73,7 +76,6 @@ export default {
 .mid-index-group-item:hover{
     background-color: #f7f6f3e7;
 }
-
 .high-index-group{
     background-color: #f30101
 }
@@ -85,8 +87,17 @@ export default {
 .high-index-group-item:hover{
     background-color: #f7f6f3e7;
 }
-
-
+.temperatures-index {
+    background-color: #3a98afe7;
+}
+.temperatures-index-item {
+    border-bottom: 1px dotted #cfd2d5;
+    cursor: pointer;
+    padding: 3px 0;
+}
+.temperatures-index-item:hover{
+    background-color: #f7f6f3e7;
+}
 .group-item-link{
     font-size: 18px;
     

@@ -1,7 +1,91 @@
 import axios from 'axios';
 import echarts from 'echarts';
 
-export function drawPEChart(url, selectorName) {
+const optionsSettings = {
+    axis: {
+        lineStyle: {
+            color: "#022042",
+            width: 2
+        },
+        xAxisTick: {
+            inside:true,
+            lineStyle:{
+                width:2,
+                type:"solid"
+            }
+        },
+        yAxisTick: {
+            inside:false,
+            lineStyle:{
+                width:2,
+                type:"solid"
+            }
+        },
+        yAxisSplitLine: {
+            show: true,
+            lineStyle: {
+                color: "#0d76b3",
+                width:2,
+                type: "solid"
+            }
+        }
+    },
+    tooltip : {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross',
+            label: {
+                backgroundColor: '#6a7985'
+            }
+        }
+    },
+    toolbox: {
+        show: true,
+        showTitle: true,
+        // left: "center",
+        top: "top",
+        right:10,
+        feature: {
+            saveAsImage: {},
+            dataView: {},
+            dataZoom: {
+                yAxisIndex: "none"
+            },
+            restore:{}
+        }
+    },
+    dataZoom: [{startValue: "2019-07-01"}, {type: "inside"}],
+    visualMap: {
+        top: "middle",
+        right: 20,
+        pieces: [{
+            gt: 0,
+            lte: 10,
+            color: '#33CC66 '
+        }, {
+            gt: 10,
+            lte: 20,
+            color: '#339966 '
+        }, {
+            gt: 20,
+            lte: 30,
+            color: '#336666 '
+        }, {
+            gt: 30,
+            lte: 80,
+            color: '#CC9966'
+        },{
+            gt: 80,
+            lte: 100,
+            color: '#CC0033 '
+        }, ],
+        outOfRange: {
+            color: '#CC0033 '
+        }
+    },
+}
+
+export function PEChart(url, selectorName) {
     // 指数的PE
     const peChart = echarts.init(document.querySelector(selectorName));
     
@@ -14,29 +98,27 @@ export function drawPEChart(url, selectorName) {
                 top: 20,
                 // textAlign:"left"
             },
-            tooltip : {
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'cross',
-                    label: {
-                        backgroundColor: '#6a7985'
-                    }
-                }
-            },
             xAxis: {
-                // name: "全指信息",
-                // nameLocation: "center",
-                // nameGap: "40",
-                // nameTextStyle: {fontWeight: "bolder", fontSize: "16"},
                 type: "category",
-                axisTick:{inside:true},
-                axisLabel: {fontSize: 16},
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick: optionsSettings.axis.xAxisTick,
+                axisLabel: {fontSize: 18},
                 data: res.data.date
             },
             yAxis: {
                 type: "value",
-                axisLabel:{fontSize:16},
+                axisLabel:{
+                    fontSize:18, 
+                    // formatter: "{value}"
+                },
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick:optionsSettings.axis.yAxisTick,
+                splitLine: optionsSettings.axis.yAxisSplitLine,
             },
+            dataZoom: optionsSettings.dataZoom,
+            tooltip: optionsSettings.tooltip,
+            toolbox: optionsSettings.toolbox,
+            // visualMap: optionsSettings.visualMap,
             series: [
                 {
                     data: res.data.pe,
@@ -59,7 +141,7 @@ export function drawPEChart(url, selectorName) {
     });
 }
 
-export  function drawPBChart(url, selectorName) {
+export  function PBChart(url, selectorName) {
     // 指数的PB
     const pbChart = echarts.init(document.querySelector(selectorName));
     
@@ -72,29 +154,27 @@ export  function drawPBChart(url, selectorName) {
                 top: 20,
                 // textAlign:"left"
             },
-            tooltip : {
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'cross',
-                    label: {
-                        backgroundColor: '#6a7985'
-                    }
-                }
-            },
             xAxis: {
-                // name: "全指信息",
-                // nameLocation: "center",
-                // nameGap: "40",
-                // nameTextStyle: {fontWeight: "bolder", fontSize: "16"},
                 type: "category",
-                axisTick:{inside:true},
-                axisLabel: {fontSize: 16},
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick: optionsSettings.axis.xAxisTick,
+                axisLabel: {fontSize: 18},
                 data: res.data.date
             },
             yAxis: {
                 type: "value",
-                axisLabel:{fontSize:16},
+                axisLabel:{
+                    fontSize:18, 
+                    // formatter: "{value}"
+                },
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick:optionsSettings.axis.yAxisTick,
+                splitLine: optionsSettings.axis.yAxisSplitLine,
             },
+            dataZoom: optionsSettings.dataZoom,
+            tooltip: optionsSettings.tooltip,
+            toolbox: optionsSettings.toolbox,
+            // visualMap: optionsSettings.visualMap,
             series: [
                 {
                     data: res.data.pb,
@@ -116,11 +196,15 @@ export  function drawPBChart(url, selectorName) {
     });
 }
 
-export  function drawPriceChart(url, selectorName) {
+export  function PriceChart(url, selectorName) {
     // 指数当前的价位
     const priceChart = echarts.init(document.querySelector(selectorName));
-    
     axios.get(url).then((res) => {
+        // alert(res.data.price)
+        if (!res.data.price){
+            alert("未获取到[" + res.data.name + "]指数的价格");
+            return
+        }
         // alert("res:" + res);
         let options = {
             title: {
@@ -129,29 +213,27 @@ export  function drawPriceChart(url, selectorName) {
                 top: 20,
                 // textAlign:"left"
             },
-            tooltip : {
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'cross',
-                    label: {
-                        backgroundColor: '#6a7985'
-                    }
-                }
-            },
             xAxis: {
-                // name: "全指信息",
-                // nameLocation: "center",
-                // nameGap: "40",
-                // nameTextStyle: {fontWeight: "bolder", fontSize: "16"},
                 type: "category",
-                axisTick:{inside:true},
-                axisLabel: {fontSize: 16},
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick: optionsSettings.axis.xAxisTick,
+                axisLabel: {fontSize: 18},
                 data: res.data.date
             },
             yAxis: {
                 type: "value",
-                axisLabel:{fontSize:16},
+                axisLabel:{
+                    fontSize:18, 
+                    // formatter: "{value}"
+                },
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick:optionsSettings.axis.yAxisTick,
+                splitLine: optionsSettings.axis.yAxisSplitLine,
             },
+            dataZoom: optionsSettings.dataZoom,
+            tooltip: optionsSettings.tooltip,
+            toolbox: optionsSettings.toolbox,
+            // visualMap: optionsSettings.visualMap,
             series: [
                 {
                     data: res.data.price,
@@ -173,7 +255,7 @@ export  function drawPriceChart(url, selectorName) {
     });
 }
 
-export  function drawROEChart(url, selectorName) {
+export  function ROEChart(url, selectorName) {
     // 指数的ROE
     const ROEChart = echarts.init(document.querySelector(selectorName));
     
@@ -186,29 +268,27 @@ export  function drawROEChart(url, selectorName) {
                 top: 20,
                 // textAlign:"left"
             },
-            tooltip : {
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'cross',
-                    label: {
-                        backgroundColor: '#6a7985'
-                    }
-                }
-            },
             xAxis: {
-                // name: "全指信息",
-                // nameLocation: "center",
-                // nameGap: "40",
-                // nameTextStyle: {fontWeight: "bolder", fontSize: "16"},
                 type: "category",
-                axisTick:{inside:true},
-                axisLabel: {fontSize: 16},
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick: optionsSettings.axis.xAxisTick,
+                axisLabel: {fontSize: 18},
                 data: res.data.date
             },
             yAxis: {
                 type: "value",
-                axisLabel:{fontSize:16, formatter: "{value} %"},
+                axisLabel:{
+                    fontSize:18, 
+                    formatter: "{value} %"
+                },
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick:optionsSettings.axis.yAxisTick,
+                splitLine: optionsSettings.axis.yAxisSplitLine,
             },
+            dataZoom: optionsSettings.dataZoom,
+            tooltip: optionsSettings.tooltip,
+            toolbox: optionsSettings.toolbox,
+            // visualMap: optionsSettings.visualMap,
             series: [
                 {
                     data: res.data.roe,
@@ -230,12 +310,16 @@ export  function drawROEChart(url, selectorName) {
     });
 }
 
-export  function drawPEPercentileChart(url, selectorName) {
+export  function PEPercentileChart(url, selectorName) {
     // PE百分位
     const chart = echarts.init(document.querySelector(selectorName));
     
     axios.get(url).then((res) => {
         // alert("res:" + res.data.roe);
+        if (! res.data.pePercent){
+            alert(`${res.data.name}还没有PE百分位`);
+            return 
+        }
         let options = {
             title: {
                 text: res.data.name + "-PE百分位(%)",
@@ -243,29 +327,27 @@ export  function drawPEPercentileChart(url, selectorName) {
                 top: 20,
                 // textAlign:"left"
             },
-            tooltip : {
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'cross',
-                    label: {
-                        backgroundColor: '#6a7985'
-                    }
-                }
-            },
             xAxis: {
-                // name: "全指信息",
-                // nameLocation: "center",
-                // nameGap: "40",
-                // nameTextStyle: {fontWeight: "bolder", fontSize: "16"},
                 type: "category",
-                axisTick:{inside:true},
-                axisLabel: {fontSize: 16},
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick: optionsSettings.axis.xAxisTick,
+                axisLabel: {fontSize: 18},
                 data: res.data.date
             },
             yAxis: {
                 type: "value",
-                axisLabel:{fontSize:16, formatter: "{value} %"},
+                axisLabel:{
+                    fontSize:18, 
+                    formatter: "{value} %"
+                },
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick:optionsSettings.axis.yAxisTick,
+                splitLine: optionsSettings.axis.yAxisSplitLine,
             },
+            dataZoom: optionsSettings.dataZoom,
+            tooltip: optionsSettings.tooltip,
+            toolbox: optionsSettings.toolbox,
+            visualMap: optionsSettings.visualMap,
             series: [
                 {
                     data: res.data.pePercent,
@@ -273,7 +355,7 @@ export  function drawPEPercentileChart(url, selectorName) {
                     symbol:"none",
                     itemStyle: {
                         normal:{
-                            color: "#0b2649",
+                            color: "#01071d",
                             lineStyle: {
                                 width: 3
                             }
@@ -287,12 +369,17 @@ export  function drawPEPercentileChart(url, selectorName) {
     });
 }
 
-export  function drawPBPercentileChart(url, selectorName) {
+export  function PBPercentileChart(url, selectorName) {
     // 指数PB百分位
     const chart = echarts.init(document.querySelector(selectorName));
     
     axios.get(url).then((res) => {
         // alert("res:" + res.data.roe);
+        // alert(res.data.pbPercent)
+        if (! res.data.pbPercent){
+            alert(`${res.data.name}还没有PB百分位`);
+            return 
+        }
         let options = {
             title: {
                 text: res.data.name + "-PB百分位(%)",
@@ -300,29 +387,27 @@ export  function drawPBPercentileChart(url, selectorName) {
                 top: 20,
                 // textAlign:"left"
             },
-            tooltip : {
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'cross',
-                    label: {
-                        backgroundColor: '#6a7985'
-                    }
-                }
-            },
             xAxis: {
-                // name: "全指信息",
-                // nameLocation: "center",
-                // nameGap: "40",
-                // nameTextStyle: {fontWeight: "bolder", fontSize: "16"},
                 type: "category",
-                axisTick:{inside:true},
-                axisLabel: {fontSize: 16},
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick: optionsSettings.axis.xAxisTick,
+                axisLabel: {fontSize: 18},
                 data: res.data.date
             },
             yAxis: {
                 type: "value",
-                axisLabel:{fontSize:16, formatter: "{value} %"},
+                axisLabel:{
+                    fontSize:18, 
+                    formatter: "{value} %"
+                },
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick:optionsSettings.axis.yAxisTick,
+                splitLine: optionsSettings.axis.yAxisSplitLine,
             },
+            dataZoom: optionsSettings.dataZoom,
+            tooltip: optionsSettings.tooltip,
+            toolbox: optionsSettings.toolbox,
+            visualMap: optionsSettings.visualMap,
             series: [
                 {
                     data: res.data.pbPercent,
@@ -330,7 +415,7 @@ export  function drawPBPercentileChart(url, selectorName) {
                     symbol:"none",
                     itemStyle: {
                         normal:{
-                            color: "#0b2649",
+                            color: "#01071d",
                             lineStyle: {
                                 width: 3
                             }
@@ -344,10 +429,14 @@ export  function drawPBPercentileChart(url, selectorName) {
     });
 }
 
-export  function drawChangePercentileChart(url, selectorName) {
+export  function ChangePercentileChart(url, selectorName) {
     const chart = echarts.init(document.querySelector(selectorName));
     
     axios.get(url).then((res) => {
+        if (! res.data.chPercent) {
+            alert("未获取到[" + res.data.name + "]指数的涨跌幅");
+            return
+        }
         // alert("res:" + res.data.roe);
         let options = {
             title: {
@@ -356,36 +445,43 @@ export  function drawChangePercentileChart(url, selectorName) {
                 top: 20,
                 // textAlign:"left"
             },
-            tooltip : {
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'cross',
-                    label: {
-                        backgroundColor: '#6a7985'
-                    }
-                }
-            },
             xAxis: {
-                // name: "全指信息",
-                // nameLocation: "center",
-                // nameGap: "40",
-                // nameTextStyle: {fontWeight: "bolder", fontSize: "16"},
                 type: "category",
-                axisTick:{inside:true},
-                axisLabel: {fontSize: 16},
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick: optionsSettings.axis.xAxisTick,
+                axisLabel: {fontSize: 18},
                 data: res.data.date
             },
             yAxis: {
                 type: "value",
                 axisLabel:{
-                    fontSize:16, 
+                    fontSize:18, 
                     formatter: "{value} %"
                 },
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick:optionsSettings.axis.yAxisTick,
+                splitLine: optionsSettings.axis.yAxisSplitLine,
             },
+            dataZoom: optionsSettings.dataZoom,
+            tooltip: optionsSettings.tooltip,
+            toolbox: optionsSettings.toolbox,
+            visualMap: {top: "middle",
+            right: 20,
+            pieces: [{
+                gt: 0,
+                color: '#CC0033 '
+            }, {
+                lt: 0,
+                color: '#339966 '
+            }, ],
+            // outOfRange: {
+            //     color: '#CC0033 '
+            // }
+        },
             series: [
                 {
                     data: res.data.chPercent,
-                    type:"line",
+                    type:"bar",
                     symbol:"none",
                     itemStyle: {
                         normal:{
@@ -403,11 +499,16 @@ export  function drawChangePercentileChart(url, selectorName) {
     });
 }
 
-export  function drawTotalVolumesChart(url, selectorName) {
+export  function TotalVolumesChart(url, selectorName) {
     // 指数的成交量
+    
     const chart = echarts.init(document.querySelector(selectorName));
     
     axios.get(url).then((res) => {
+        if (! res.data.totalVolumes) {
+            alert("未获取到[" + res.data.name + "]指数的成交量");
+            return
+        }
         // alert("res:" + res.data.roe);
         let options = {
             title: {
@@ -416,31 +517,22 @@ export  function drawTotalVolumesChart(url, selectorName) {
                 top: 20,
                 // textAlign:"left"
             },
-            tooltip : {
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'cross',
-                    label: {
-                        backgroundColor: '#6a7985'
-                    }
-                }
-            },
             xAxis: {
-                // name: "全指信息",
-                // nameLocation: "center",
-                // nameGap: "40",
-                // nameTextStyle: {fontWeight: "bolder", fontSize: "16"},
                 type: "category",
-                axisTick:{inside:true},
-                axisLabel: {fontSize: 16},
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick: optionsSettings.axis.xAxisTick,
+                axisLabel: {fontSize: 18},
                 data: res.data.date
             },
             yAxis: {
                 type: "value",
                 axisLabel:{
-                    fontSize:16,
+                    fontSize:18, 
                     formatter: "{value} 亿元"
                 },
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick:optionsSettings.axis.yAxisTick,
+                splitLine: optionsSettings.axis.yAxisSplitLine,
             },
             series: [
                 {

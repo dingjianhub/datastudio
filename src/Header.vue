@@ -24,7 +24,7 @@ export default {
 <style scoped>
 .header {
     width: 100%;
-    height: 100px;
+    height: 70px;
     background-color: #f3f5f7;
     float: hidden;
 }
@@ -32,7 +32,7 @@ export default {
     display: block;
     width: 100%;
     /* height: 100px; */
-    line-height: 100px;
+    line-height: 70px;
     float: left;
     margin-left: 60px;
     text-decoration: none;

@@ -24,16 +24,16 @@
 // import echarts from 'echarts';
 // import CommonBtn from '../../CommonBtn';
 import Header from '../../Header';
-import {   drawPEChart, 
-                drawPBChart,
-                drawPriceChart,
-                drawROEChart,
-                drawPEPercentileChart,
-                drawPBPercentileChart,
-                drawChangePercentileChart,
-                drawTotalVolumesChart,
-                } from '../../drawCharts';
-// import drawPBChart from '../../drawCharts';
+import {   PEChart, 
+                PBChart,
+                PriceChart,
+                ROEChart,
+                PEPercentileChart,
+                PBPercentileChart,
+                ChangePercentileChart,
+                TotalVolumesChart,
+                } from '../../Charts';
+// import PBChart from '../../Charts';
 
 export default {
     data() {
@@ -49,36 +49,36 @@ export default {
     methods: {
         PE(){
             const url = "http://127.0.0.1:5000/index/"+this.indexCode+"/pe";
-            drawPEChart(url, this.selectorName)
+            PEChart(url, this.selectorName)
         },
         PB(){
             const url = "http://127.0.0.1:5000/index/"+this.indexCode+"/pb";
-            drawPBChart(url, this.selectorName)
+            PBChart(url, this.selectorName)
         },
         Price(){
             const url = "http://127.0.0.1:5000/index/"+this.indexCode+"/price";
-            drawPriceChart(url, this.selectorName);
+            PriceChart(url, this.selectorName);
         },
         ROE(){
             const url = "http://127.0.0.1:5000/index/"+this.indexCode+"/roe";
-            drawROEChart(url, this.selectorName);
+            ROEChart(url, this.selectorName);
         },
 
         PEPercentile(){
             const url = "http://127.0.0.1:5000/index/"+this.indexCode+"/pe-percent";
-            drawPEPercentileChart(url, this.selectorName);
+            PEPercentileChart(url, this.selectorName);
         },
         PBPercentile(){
             const url = "http://127.0.0.1:5000/index/"+this.indexCode+"/pb-percent";
-            drawPBPercentileChart(url, this.selectorName);
+            PBPercentileChart(url, this.selectorName);
         },
         ChangePercentile(){
             const url = "http://127.0.0.1:5000/index/"+this.indexCode+"/change-percent";
-            drawChangePercentileChart(url, this.selectorName);
+            ChangePercentileChart(url, this.selectorName);
         },
         TotalVolumes(){
             const url = "http://127.0.0.1:5000/index/"+this.indexCode+"/volumes";
-            drawTotalVolumesChart(url, this.selectorName);
+            TotalVolumesChart(url, this.selectorName);
         }
     },  
 }

@@ -67,16 +67,18 @@ export default {
 
 
 <style scoped>
+/* 
 .header {
     width: 100%;
     height: 100px;
     background-color: #f3f5f7;
     float: hidden;
-}
+} 
+*/
+/* 
 .header-logo {
     display: block;
     width: 100%;
-    /* height: 100px; */
     line-height: 100px;
     float: left;
     margin-left: 60px;
@@ -84,6 +86,7 @@ export default {
     font-size: 20px;
     font-weight: bold;
 }
+ */
 
 #main{
     overflow: hidden;
