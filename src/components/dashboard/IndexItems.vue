@@ -1,0 +1,102 @@
+<template>
+    <div class="aside-letf-content">
+        <label class="index-group-content">低估指数</label>
+        <ul class="low-index-group" v-for="item in lowIndex" :key="item.code">
+            <li class="low-index-group-item"><a :href="'#/' + item.code" class="group-item-link">{{item.name}}</a></li>
+        </ul>
+        <label class="index-group-content">估值适中</label>
+        <ul class="mid-index-group" v-for="item in midIndex" :key="item.code">
+            <li class="mid-index-group-item"><a :href="'#/' + item.code" class="group-item-link">{{item.name}}</a></li>
+        </ul>
+        <label class="index-group-content">高估指数</label>
+        <ul class="high-index-group" v-for="item in highIndex" :key="item.code">
+            <li class="high-index-group-item"><a :href="'#/' + item.code" class="group-item-link">{{item.name}}</a></li>
+        </ul>
+    </div>
+</template> 
+
+<script>
+import axios from "axios";
+export default {
+    data(){
+        return {
+            lowIndex:[],
+            midIndex:[],
+            highIndex:[]
+            }
+    },
+    created(){
+        axios.get("http://127.0.0.1:5000/index/group").then((res) => {
+            this.lowIndex = res.data.lowIndex;
+            this.midIndex = res.data.midIndex;
+            this.highIndex = res.data.highIndex;
+        
+        })
+    }
+
+}
+</script>
+
+<style scoped>
+.aside-letf-content {
+    float: left;
+    width: 20%;
+    background-color: #cfd2d5
+}
+
+.index-group-content{
+    /* background-color: #1e9407 */
+    font-size: 22px;
+    font-weight: bold;
+}
+.low-index-group{
+    background-color: #1e9407
+}
+
+.low-index-group-item {
+    border-bottom: 1px dotted #cfd2d5;
+    cursor: pointer;
+    padding: 3px 0;
+}
+.low-index-group-item:hover{
+    background-color: #fff;
+}
+
+.mid-index-group{
+    background-color: #9c9e25
+}
+.mid-index-group-item {
+    border-bottom: 1px dotted #cfd2d5;
+    cursor: pointer;
+    padding: 3px 0;
+}
+.mid-index-group-item:hover{
+    background-color: #f7f6f3e7;
+}
+
+.high-index-group{
+    background-color: #f30101
+}
+.high-index-group-item {
+    border-bottom: 1px dotted #cfd2d5;
+    cursor: pointer;
+    padding: 3px 0;
+}
+.high-index-group-item:hover{
+    background-color: #f7f6f3e7;
+}
+
+
+.group-item-link{
+    font-size: 18px;
+    
+    text-decoration: none;
+    color: #000;
+    /* font-weight: bold; */
+}
+.group-item-link:hover{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+</style>

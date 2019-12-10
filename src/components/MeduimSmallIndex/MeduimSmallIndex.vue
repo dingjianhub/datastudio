@@ -15,7 +15,7 @@
         </div>
         
         <hr>
-        <div class="full-info-index"></div>
+        <div class="meduim-small-index"></div>
     </div>
 </template>
 
@@ -37,7 +37,7 @@ import {   drawPEChart,
 
 export default {
     data() {
-        return {indexCode: "000993", selectorName: ".full-info-index"}
+        return {indexCode: "399005", selectorName: ".meduim-small-index"}
     },
     components:{
         Header,
@@ -115,7 +115,7 @@ export default {
     font-weight: bold;
 }
 
-.full-info-index {
+.meduim-small-index {
     background: gainsboro;
     width: 80%;
     height: 800px;

@@ -15,7 +15,7 @@
         </div>
         
         <hr>
-        <div class="full-info-index"></div>
+        <div class="pension-industry-index"></div>
     </div>
 </template>
 
@@ -37,7 +37,7 @@ import {   drawPEChart,
 
 export default {
     data() {
-        return {indexCode: "000993", selectorName: ".full-info-index"}
+        return {indexCode: "399812", selectorName: ".pension-industry-index"}
     },
     components:{
         Header,
@@ -115,7 +115,7 @@ export default {
     font-weight: bold;
 }
 
-.full-info-index {
+.pension-industry-index {
     background: gainsboro;
     width: 80%;
     height: 800px;

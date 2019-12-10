@@ -7,7 +7,7 @@ home_bp = Blueprint("home_bp", __name__)
 
 @home_bp.route("/search")
 def search_all_index():
-    data_files = os.listdir("D:\量化投资之路\workspace\datastudio\datas")
+    data_files = os.listdir("/home/ay/workspace/datastudio/datas")
     results = []
     for filename in data_files:
         # print(filename)

@@ -15,7 +15,7 @@
         </div>
         
         <hr>
-        <div class="full-info-index"></div>
+        <div class="index-100-detail"></div>
     </div>
 </template>
 
@@ -37,7 +37,10 @@ import {   drawPEChart,
 
 export default {
     data() {
-        return {indexCode: "000993", selectorName: ".full-info-index"}
+        return {
+            indexCode: "000903",
+            selectorName: ".index-100-detail",
+            }
     },
     components:{
         Header,
@@ -115,7 +118,7 @@ export default {
     font-weight: bold;
 }
 
-.full-info-index {
+.index-100-detail {
     background: gainsboro;
     width: 80%;
     height: 800px;
