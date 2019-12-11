@@ -682,7 +682,7 @@ export  function TotalMarketVolumes(url, selectorName) {
                 splitLine: optionsSettings.axis.yAxisSplitLine,
             },
             legend: {
-                data: ["沪股通", "深股通", "两市合计"]
+                data: ["沪市", "深市", "两市合计"]
             },
             dataZoom: optionsSettings.dataZoom,
             tooltip: optionsSettings.tooltip,
@@ -690,7 +690,7 @@ export  function TotalMarketVolumes(url, selectorName) {
             series: [
                 {
                     data: res.data.sh_data_list,
-                    name: "沪股通",
+                    name: "沪市",
                     type:"line",
                     symbol:"none",
                     itemStyle: {
@@ -705,7 +705,7 @@ export  function TotalMarketVolumes(url, selectorName) {
                 {
                     data: res.data.sz_data_list,
                     type:"line",
-                    name: "深股通",
+                    name: "深市",
                     symbol:"none",
                     itemStyle: {
                         normal:{
