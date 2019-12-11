@@ -336,6 +336,7 @@ export  function PEPercentileChart(url, selectorName) {
             },
             yAxis: {
                 type: "value",
+                interval:10,
                 axisLabel:{
                     fontSize:18, 
                     formatter: "{value} %"
@@ -360,7 +361,7 @@ export  function PEPercentileChart(url, selectorName) {
                                 width: 3
                             }
                         }
-                    }
+                    },
                 }
             ]
         }
@@ -396,6 +397,7 @@ export  function PBPercentileChart(url, selectorName) {
             },
             yAxis: {
                 type: "value",
+                interval:10,
                 axisLabel:{
                     fontSize:18, 
                     formatter: "{value} %"
@@ -454,6 +456,7 @@ export  function ChangePercentileChart(url, selectorName) {
             },
             yAxis: {
                 type: "value",
+                // interval:2,
                 axisLabel:{
                     fontSize:18, 
                     formatter: "{value} %"
@@ -477,7 +480,7 @@ export  function ChangePercentileChart(url, selectorName) {
             // outOfRange: {
             //     color: '#CC0033 '
             // }
-        },
+            },
             series: [
                 {
                     data: res.data.chPercent,
@@ -534,6 +537,9 @@ export  function TotalVolumesChart(url, selectorName) {
                 axisTick:optionsSettings.axis.yAxisTick,
                 splitLine: optionsSettings.axis.yAxisSplitLine,
             },
+            dataZoom: optionsSettings.dataZoom,
+            tooltip: optionsSettings.tooltip,
+            toolbox: optionsSettings.toolbox,
             series: [
                 {
                     data: res.data.totalVolumes,
@@ -552,5 +558,404 @@ export  function TotalVolumesChart(url, selectorName) {
         }
         // alert(options.title.text);
         chart.setOption(options, true)
+    });
+}
+
+
+export  function TotalNorthMoney(url, queryString, selectorName) {
+    // 指数的成交量
+    
+    const chart = echarts.init(document.querySelector(selectorName));
+    
+    axios.get(url + queryString).then((res) => {
+
+        if (! res.data.data_list) {
+            alert("获取失败");
+            return
+        }
+        let text = "";
+        if (queryString === "?market=sh"){
+            text = "沪股通";
+        }else if (queryString === "?market=sz"){
+            text = "深股通";
+        } else{
+            text = "北向资金合计";
+        }
+        // alert("res:" + res.data.roe);
+        let options = {
+            title: {
+                text: text,
+                left:"center",
+                top: 20,
+                // textAlign:"left"
+            },
+            xAxis: {
+                type: "category",
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick: optionsSettings.axis.xAxisTick,
+                axisLabel: {fontSize: 18},
+                data: res.data.date
+            },
+            yAxis: {
+                type: "value",
+                // interval: 50,
+                axisLabel:{
+                    fontSize:18, 
+                    formatter: "{value} 亿元"
+                },
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick:optionsSettings.axis.yAxisTick,
+                splitLine: optionsSettings.axis.yAxisSplitLine,
+            },
+            dataZoom: optionsSettings.dataZoom,
+            tooltip: optionsSettings.tooltip,
+            toolbox: optionsSettings.toolbox,
+            visualMap: {top: "middle",
+            right: 20,
+            pieces: [{
+                gt: 0,
+                color: '#CC0033 '
+            }, {
+                lt: 0,
+                color: '#339966 '
+            }, ],
+            // outOfRange: {
+            //     color: '#CC0033 '
+            // }
+            },
+            series: [
+                {
+                    data: res.data.data_list,
+                    type:"bar",
+                    symbol:"none",
+                    itemStyle: {
+                        normal:{
+                            color: "#0b2649",
+                            lineStyle: {
+                                width: 3
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+        // alert(options.title.text);
+        chart.setOption(options, true)
+    });
+}
+
+export  function TotalMarketVolumes(url, selectorName) {
+    // 指数的成交量
+    const chart = echarts.init(document.querySelector(selectorName));
+    
+    axios.get(url).then((res) => {
+        // alert(res.data.sh_data_list)
+        if (res.data.errno) {
+            alert("获取失败");
+            return
+        }
+        
+        // alert("res:" + res.data.roe);
+        let options = {
+            title: {
+                text: "市场成交量",
+                left:"center",
+                top: 20,
+                // textAlign:"left"
+            },
+            xAxis: {
+                type: "category",
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick: optionsSettings.axis.xAxisTick,
+                axisLabel: {fontSize: 18},
+                data: res.data.date
+            },
+            yAxis: {
+                type: "value",
+                // interval: 50,
+                axisLabel:{
+                    fontSize:18, 
+                    formatter: "{value} 亿元"
+                },
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick:optionsSettings.axis.yAxisTick,
+                splitLine: optionsSettings.axis.yAxisSplitLine,
+            },
+            legend: {
+                data: ["沪股通", "深股通", "两市合计"]
+            },
+            dataZoom: optionsSettings.dataZoom,
+            tooltip: optionsSettings.tooltip,
+            toolbox: optionsSettings.toolbox,           
+            series: [
+                {
+                    data: res.data.sh_data_list,
+                    name: "沪股通",
+                    type:"line",
+                    symbol:"none",
+                    itemStyle: {
+                        normal:{
+                            // color: "#0b2649",
+                            lineStyle: {
+                                width: 3
+                            }
+                        }
+                    }
+                },
+                {
+                    data: res.data.sz_data_list,
+                    type:"line",
+                    name: "深股通",
+                    symbol:"none",
+                    itemStyle: {
+                        normal:{
+                            // color: "#0b2649",
+                            lineStyle: {
+                                width: 3
+                            }
+                        }
+                    }
+                },
+                {
+                    data: res.data.total_volumes,
+                    type:"line",
+                    name: "两市合计",
+                    symbol:"none",
+                    itemStyle: {
+                        normal:{
+                            // color: "#0b2649",
+                            lineStyle: {
+                                width: 3
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+        // alert(options.title.text);
+        chart.setOption(options, true)
+    });
+}
+
+export function InvestorsCharts(url, selectorName) {
+    // 指数的PE
+    const peChart = echarts.init(document.querySelector(selectorName));
+    
+    axios.get(url).then((res) => {
+        // alert("res:" + res);
+        let options = {
+            title: {
+                text: "投资者数量变化",
+                left:"center",
+                top: 20,
+                // textAlign:"left"
+            },
+            xAxis: {
+                type: "category",
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick: optionsSettings.axis.xAxisTick,
+                axisLabel: {fontSize: 18},
+                data: res.data.date
+            },
+            yAxis: {
+                type: "value",
+                axisLabel:{
+                    fontSize:18, 
+                    formatter: "{value} 万"
+                },
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick:optionsSettings.axis.yAxisTick,
+                splitLine: optionsSettings.axis.yAxisSplitLine,
+            },
+            dataZoom: optionsSettings.dataZoom,
+            tooltip: optionsSettings.tooltip,
+            toolbox: optionsSettings.toolbox,
+            // visualMap: optionsSettings.visualMap,
+            series: [
+                {
+                    data: res.data.data_list,
+                    type:"bar",
+                    symbol:"none",
+                    itemStyle: {
+                        normal:{
+                            color: "#0b2649",
+                            lineStyle: {
+                                width: 3
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+        // alert(options.title.text);
+        peChart.setOption(options, true)
+        
+    });
+}
+
+export function ASharesValuesCharts(url, selectorName) {
+    // A股流通市值
+    const peChart = echarts.init(document.querySelector(selectorName));
+    axios.get(url).then((res) => {
+        // alert("res:" + res);
+        let options = {
+            title: {
+                text: "A股流通市值",
+                left:"center",
+                top: 20,
+                // textAlign:"left"
+            },
+            xAxis: {
+                type: "category",
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick: optionsSettings.axis.xAxisTick,
+                axisLabel: {fontSize: 18},
+                data: res.data.date
+            },
+            yAxis: {
+                type: "value",
+                axisLabel:{
+                    fontSize:18, 
+                    formatter: "{value} 亿"
+                },
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick:optionsSettings.axis.yAxisTick,
+                splitLine: optionsSettings.axis.yAxisSplitLine,
+            },
+            dataZoom: optionsSettings.dataZoom,
+            tooltip: optionsSettings.tooltip,
+            toolbox: optionsSettings.toolbox,
+            // visualMap: optionsSettings.visualMap,
+            series: [
+                {
+                    data: res.data.data_list,
+                    type:"line",
+                    symbol:"none",
+                    itemStyle: {
+                        normal:{
+                            color: "#0b2649",
+                            lineStyle: {
+                                width: 3
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+        // alert(options.title.text);
+        peChart.setOption(options, true)
+        
+    });
+}
+
+export function SHIndexCharts(url, selectorName) {
+    // A股流通市值
+    
+    const peChart = echarts.init(document.querySelector(selectorName));
+    axios.get(url).then((res) => {
+        // alert("res:" + res.data.data_list);
+        let options = {
+            title: {
+                text: "上证指数",
+                left:"center",
+                top: 20,
+                // textAlign:"left"
+            },
+            xAxis: {
+                type: "category",
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick: optionsSettings.axis.xAxisTick,
+                axisLabel: {fontSize: 18},
+                data: res.data.date
+            },
+            yAxis: {
+                type: "value",
+                axisLabel:{
+                    fontSize:18, 
+                    formatter: "{value}"
+                },
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick:optionsSettings.axis.yAxisTick,
+                splitLine: optionsSettings.axis.yAxisSplitLine,
+            },
+            dataZoom: optionsSettings.dataZoom,
+            tooltip: optionsSettings.tooltip,
+            toolbox: optionsSettings.toolbox,
+            // visualMap: optionsSettings.visualMap,
+            series: [
+                {
+                    data: res.data.data_list,
+                    type:"line",
+                    symbol:"none",
+                    itemStyle: {
+                        normal:{
+                            color: "#0b2649",
+                            lineStyle: {
+                                width: 3
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+        // alert(options.title.text);
+        peChart.setOption(options, true)
+        
+    });
+}
+
+export function SZIndexCharts(url, selectorName) {
+    // A股流通市值
+    
+    const peChart = echarts.init(document.querySelector(selectorName));
+    axios.get(url).then((res) => {
+        // alert("res:" + res.data.data_list);
+        let options = {
+            title: {
+                text: "深证成指",
+                left:"center",
+                top: 20,
+                // textAlign:"left"
+            },
+            xAxis: {
+                type: "category",
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick: optionsSettings.axis.xAxisTick,
+                axisLabel: {fontSize: 18},
+                data: res.data.date
+            },
+            yAxis: {
+                type: "value",
+                axisLabel:{
+                    fontSize:18, 
+                    formatter: "{value}"
+                },
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick:optionsSettings.axis.yAxisTick,
+                splitLine: optionsSettings.axis.yAxisSplitLine,
+            },
+            dataZoom: optionsSettings.dataZoom,
+            tooltip: optionsSettings.tooltip,
+            toolbox: optionsSettings.toolbox,
+            // visualMap: optionsSettings.visualMap,
+            series: [
+                {
+                    data: res.data.data_list,
+                    type:"line",
+                    symbol:"none",
+                    itemStyle: {
+                        normal:{
+                            color: "#0b2649",
+                            lineStyle: {
+                                width: 3
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+        // alert(options.title.text);
+        peChart.setOption(options, true)
+        
     });
 }

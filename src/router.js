@@ -5,6 +5,7 @@ Vue.use(VueRouter);
 
 
 import Dashboard from './components/dashboard/dashboard.vue';
+import SZIndex from './components/SZIndex/SZIndex.vue';
 import SHIndex50 from './components/SHIndex50/SHIndex50.vue';
 import Index100 from './components/Index100/Index100.vue';
 import SZ100 from './components/SZ100/SZ100.vue';
@@ -23,12 +24,18 @@ import IndexMedia from './components/IndexMedia/IndexMedia.vue';
 import FullComsueIndex from './components/FullComsumeIndex/FullComsumeIndex.vue';
 import EnvironmentIndex from './components/EnvironmentIndex/EnvironmentIndex.vue';
 import MalitaryIndex from './components/MilitaryIndex/MilitaryIndex.vue';
-import SecurityCompany from './components/ SecuritiesCompany/SecuritiesCompany.vue';
+import SecurityCompany from './components/SecuritiesCompany/SecuritiesCompany.vue';
+
+import MarketTemperature from './components/MarketTemperature/MarketTermperature.vue';
 
 const routes = [
     {
         path: "/dashboard",
         component: Dashboard
+    },
+    {
+        path: "/399001",
+        component: SZIndex
     },
     {
         path: "/000016", // 上证50
@@ -105,6 +112,10 @@ const routes = [
     {
         path: "/399967", // 中证军工
         component: MalitaryIndex
+    },
+    {
+        path: "/market-temperature",
+        component: MarketTemperature
     },
     {
         path: "/",

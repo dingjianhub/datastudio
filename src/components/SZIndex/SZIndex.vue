@@ -15,32 +15,30 @@
         </div>
         
         <hr>
-        <div class="security-company"></div>
+        <div class="sz-index"></div>
     </div>
 </template>
 
 <script>
-// import axios from 'axios';
-// import echarts from 'echarts';
-// import CommonBtn from '../../CommonBtn';
+
 import Header from '../../Header';
-import {   PEChart, 
-                PBChart,
-                PriceChart,
-                ROEChart,
-                PEPercentileChart,
-                PBPercentileChart,
-                ChangePercentileChart,
-                TotalVolumesChart,
-                } from '../../Charts';
-// import PBChart from '../../Charts';
+import {   
+    PEChart, 
+    PBChart,
+    PriceChart,
+    ROEChart,
+    PEPercentileChart,
+    PBPercentileChart,
+    ChangePercentileChart,
+    TotalVolumesChart,
+} from '../../Charts';
 
 export default {
     data() {
         return {
-            indexCode: "399975",
-            selectorName: ".security-company",
-            }
+            indexCode: "399001",
+            baseurl: "http://127.0.0.1:5000/index/",
+            selectorName: ".sz-index"}
     },
     components:{
         Header,
@@ -48,36 +46,36 @@ export default {
     },
     methods: {
         PE(){
-            const url = "http://127.0.0.1:5000/index/"+this.indexCode+"/pe";
+            const url = this.baseurl+this.indexCode+"/pe";
             PEChart(url, this.selectorName)
         },
         PB(){
-            const url = "http://127.0.0.1:5000/index/"+this.indexCode+"/pb";
+            const url = this.baseurl+this.indexCode+"/pb";
             PBChart(url, this.selectorName)
         },
         Price(){
-            const url = "http://127.0.0.1:5000/index/"+this.indexCode+"/price";
+            const url = this.baseurl+this.indexCode+"/price";
             PriceChart(url, this.selectorName);
         },
         ROE(){
-            const url = "http://127.0.0.1:5000/index/"+this.indexCode+"/roe";
+            const url = this.baseurl+this.indexCode+"/roe";
             ROEChart(url, this.selectorName);
         },
 
         PEPercentile(){
-            const url = "http://127.0.0.1:5000/index/"+this.indexCode+"/pe-percent";
+            const url = this.baseurl+this.indexCode+"/pe-percent";
             PEPercentileChart(url, this.selectorName);
         },
         PBPercentile(){
-            const url = "http://127.0.0.1:5000/index/"+this.indexCode+"/pb-percent";
+            const url = this.baseurl+this.indexCode+"/pb-percent";
             PBPercentileChart(url, this.selectorName);
         },
         ChangePercentile(){
-            const url = "http://127.0.0.1:5000/index/"+this.indexCode+"/change-percent";
+            const url = this.baseurl+this.indexCode+"/change-percent";
             ChangePercentileChart(url, this.selectorName);
         },
         TotalVolumes(){
-            const url = "http://127.0.0.1:5000/index/"+this.indexCode+"/volumes";
+            const url = this.baseurl+this.indexCode+"/volumes";
             TotalVolumesChart(url, this.selectorName);
         }
     },  
@@ -85,40 +83,7 @@ export default {
 </script>
 
 <style scoped>
-*{
-    margin: 0;
-    padding: 0;
-}
-
-#main{
-    overflow: hidden;
-}
-
-.detial-aside-left{
-    width: 20%;
-
-    background-color: #c0c2c9;
-    float: left;
-}
-
-.common-btn-item {
-    display: block;
-    width:100%;
-    height: 100px;
-    font-size: 20px;
-    padding: 20px 0;
-    /* margin: 5px 0; */
-    border: 1px dotted #c0b7b7;
-    color: #0b2649
-}
-.common-btn-item:hover{
-    font-size: 22px;
-    cursor: pointer;
-    background-color: #6d8bb1;
-    font-weight: bold;
-}
-
-.security-company {
+.sz-index {
     background: gainsboro;
     width: 80%;
     height: 800px;

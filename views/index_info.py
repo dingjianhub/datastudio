@@ -123,14 +123,14 @@ def read_index_group(index=-1):
         index_names = []
         # print(len(sheet_names))
         for i in range (0, len(sheet_names)):
-            index_codes += pd.read_excel(group_filename, sheet_name=sheet_names[i],encoding='gbk')["指数代码"].to_list()
-            index_names += pd.read_excel(group_filename, sheet_name=sheet_names[i],encoding='gbk')["指数名称"].to_list()
+            df = pd.read_excel(group_filename, sheet_name=sheet_names[i],encoding='gbk')
+            index_codes += df["指数代码"].to_list()
+            index_names += df["指数名称"].to_list()
         return index_codes, index_names
-            
-    index_codes = pd.read_excel(group_filename, sheet_name=sheet_names[index],encoding='gbk')["指数代码"].to_list()
-    index_names = pd.read_excel(group_filename, sheet_name=sheet_names[index],encoding='gbk')["指数名称"].to_list()
+    df = pd.read_excel(group_filename, sheet_name=sheet_names[index],encoding='gbk')
+    index_codes = df["指数代码"].to_list()
+    index_names = df["指数名称"].to_list()
     return index_codes, index_names
-        
 
 def parse_index_group(index_codes, index_names, all_index=0):
     """处理指数代码"""
@@ -140,6 +140,7 @@ def parse_index_group(index_codes, index_names, all_index=0):
         return None
     all_index_dict = {}
     for code, name in zip(index_codes, index_names):
+        
         item = {}
         new_code = code.split(".")[0]
         if new_code.isdigit():
@@ -148,11 +149,24 @@ def parse_index_group(index_codes, index_names, all_index=0):
                 all_index_dict.update({new_code: name})
             item["code"] = new_code
             item["name"] = name
+            item["price"] = get_index_latest_price(name)
             results.append(item)
 
     if all_index == 1:
         return all_index_dict
     return results
+
+def get_index_latest_price(index_name):
+    """获取指数最新的价格"""
+    if index_name == "可选消费":
+        index_name = "全指可选"
+    filename = f"/home/ay/workspace/datastudio/datas/{index_name}.csv"
+    df = pd.read_csv(filename, encoding="GBK",keep_default_na=False)
+    price = df["收盘价"].to_list()[-1]
+    if price is "":
+        return "无"
+    return "%.2f" % float(price)
+
 
 def convert_index_code_to_name(index_code):
     """把指数代码转成指数名称"""
@@ -166,7 +180,6 @@ def convert_index_code_to_name(index_code):
     if index_code is None:
         return index_name_code_dict.values()
     return index_name_code_dict[index_code]
-
 
 def check_index_code(index_name):
     """判断指数名称是否正确"""

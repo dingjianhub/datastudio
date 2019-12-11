@@ -88,10 +88,6 @@ export default {
 }
  */
 
-#main{
-    overflow: hidden;
-}
-
 #aside-left {
     width: 20%;
     background: #cbd3cc;

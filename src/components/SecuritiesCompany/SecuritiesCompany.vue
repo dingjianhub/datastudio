@@ -15,7 +15,7 @@
         </div>
         
         <hr>
-        <div class="pension-industry-index"></div>
+        <div class="security-company"></div>
     </div>
 </template>
 
@@ -37,9 +37,9 @@ import {
 export default {
     data() {
         return {
-            indexCode: "399812",
+            indexCode: "399975",
             baseurl: "http://127.0.0.1:5000/index/",
-            selectorName: ".pension-industry-index"
+            selectorName: ".security-company",
         }
     },
     components:{
@@ -85,7 +85,7 @@ export default {
 </script>
 
 <style scoped>
-.pension-industry-index {
+.security-company {
     background: gainsboro;
     width: 80%;
     height: 800px;
