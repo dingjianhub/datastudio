@@ -84,7 +84,7 @@ export default {
     padding: 3px 0;
 }
 .low-index-group-item:hover{
-    background-color: #6ea2e7;
+    background-color: #e4ecf6;
 }
 .mid-index-group{
     background-color: #9c9e25
@@ -95,7 +95,7 @@ export default {
     padding: 3px 0;
 }
 .mid-index-group-item:hover{
-    background-color: #6ea2e7;
+    background-color: #e4ecf6;
 }
 .high-index-group{
     background-color: #f30101
@@ -106,7 +106,7 @@ export default {
     padding: 3px 0;
 }
 .high-index-group-item:hover{
-    background-color: #6ea2e7;
+    background-color: #e4ecf6;
 }
 .temperatures-index {
     background-color: #3a98afe7;
@@ -117,7 +117,7 @@ export default {
     padding: 3px 0;
 }
 .temperatures-index-item:hover{
-    background-color: #f3f5f7e7;
+    background-color: #e4ecf6;
 }
 .group-item-link{
     font-size: 18px;
@@ -125,12 +125,12 @@ export default {
     color: #000;
     /* font-weight: bold; */
 }
-/*
+
 .group-item-link:hover{
-    font-size: 20px;
+    /* font-size: 20px; */
     font-weight: bold;
 }
-*/
+
 .price-item {
     font-size: 16px;
 }

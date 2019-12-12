@@ -672,7 +672,7 @@ export  function TotalMarketVolumes(url, selectorName) {
             },
             yAxis: {
                 type: "value",
-                // interval: 50,
+                interval: 3000,
                 axisLabel:{
                     fontSize:18, 
                     formatter: "{value} 亿元"

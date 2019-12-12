@@ -11,7 +11,7 @@
 .common-btn-item:hover{
     font-size: 22px;
     cursor: pointer;
-    background-color: #6d8bb1;
+    background-color: #6db1a6;
     font-weight: bold;
 }
 .common-btn-item:focus{
@@ -20,7 +20,6 @@
 
 .detial-aside-left{
     width: 20%;
-
     background-color: #c0c2c9;
     float: left;
 }

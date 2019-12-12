@@ -124,7 +124,8 @@ const routes = [
 ];
 
 var routers = new VueRouter({
-    routes,
+    // mode: "history",
+    routes: routes,
 });
 
 
