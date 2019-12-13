@@ -66,12 +66,41 @@ def index_pb_percent(index_code):
     index_name, date_list, data_list = read_datas(index_code, col_name)
     return jsonify(errno=response_code.success, errmsg="获取成功", name=index_name, date=date_list, pbPercent=data_list)
 
-@index_info_bp.route("/<string:index_code>/change-percent")
-def index_change_percent(index_code):
+@index_info_bp.route("/<string:index_code>/daily-change-percent")
+def index_daily_change_percent(index_code):
     """获取指数涨跌幅"""
     col_name = "涨跌幅"
     index_name, date_list, data_list = read_datas(index_code, col_name)
-    return jsonify(errno=response_code.success, errmsg="获取成功", name=index_name, date=date_list, chPercent=data_list)
+    return jsonify(
+        errno=response_code.success, 
+        errmsg="获取成功", 
+        name=index_name, 
+        date=date_list, 
+        dailyChPercent=data_list)
+
+@index_info_bp.route("/<string:index_code>/year-change-percent")
+def index_year_change_percent(index_code):
+    """获取指数年涨跌幅"""
+    filename ="/home/ay/workspace/datastudio/datas/index_perf.csv"
+    index_name = convert_index_code_to_name(index_code)
+    df = pd.read_csv(filename, keep_default_na=False)
+    dates = df["年份"].to_list()
+    data_list = df[index_name].to_list()
+    results = []
+    date_list = []
+    for i in range(len(data_list)):
+        if data_list[i] is not "":
+            date_list.append(dates[i])
+            results.append(data_list[i].split("%")[0])
+    response_dict = {
+        "errno":response_code.success, 
+        "errmsg":"获取成功",
+        "name":index_name,
+        "date" : date_list,
+        "yearChPercent": results
+    }
+    return jsonify(response_dict)
+
 
 @index_info_bp.route("/<string:index_code>/volumes")
 def index_total_volumes(index_code):

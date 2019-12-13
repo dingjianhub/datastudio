@@ -10,7 +10,8 @@
             <button class="common-btn-item" @click="ROE">ROE</button>
             <button class="common-btn-item" @click="PEPercentile">PE百分位</button>
             <button class="common-btn-item" @click="PBPercentile">PB百分位</button>
-            <button class="common-btn-item" @click="ChangePercentile">涨跌幅</button>
+            <button class="common-btn-item" @click="dailyChangePercentile">日涨跌幅</button>
+            <button class="common-btn-item" @click="yearChangePercentile">年涨跌幅</button>
             <button class="common-btn-item" @click="TotalVolumes">成交量</button>
         </div>
         
@@ -29,7 +30,8 @@ import {
     ROEChart,
     PEPercentileChart,
     PBPercentileChart,
-    ChangePercentileChart,
+    DailyChangePercentileChart,
+    YearChangePercentileChart,
     TotalVolumesChart,
 } from '../../Charts';
 
@@ -72,9 +74,13 @@ export default {
             const url = this.baseurl+this.indexCode+"/pb-percent";
             PBPercentileChart(url, this.selectorName);
         },
-        ChangePercentile(){
-            const url = this.baseurl+this.indexCode+"/change-percent";
-            ChangePercentileChart(url, this.selectorName);
+        dailyChangePercentile(){
+            const url = this.baseurl+this.indexCode+"/daily-change-percent";
+            DailyChangePercentileChart(url, this.selectorName);
+        },
+        yearChangePercentile(){
+            const url = this.baseurl+this.indexCode+"/year-change-percent";
+            YearChangePercentileChart(url, this.selectorName);
         },
         TotalVolumes(){
             const url = this.baseurl+this.indexCode+"/volumes";
@@ -88,7 +94,7 @@ export default {
 .full-info-index {
     background: gainsboro;
     width: 80%;
-    height: 800px;
+    height: 900px;
     text-align: center;
     margin: 0 auto;
     float: left;

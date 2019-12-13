@@ -46,12 +46,13 @@ const optionsSettings = {
         top: "top",
         right:10,
         feature: {
-            saveAsImage: {},
-            dataView: {},
+            // magicType: {show: true, type: ['line', 'bar']},
+            // dataView: {},
             dataZoom: {
                 yAxisIndex: "none"
             },
-            restore:{}
+            saveAsImage: {},
+            restore:{},
         }
     },
     dataZoom: [{startValue: "2019-07-01"}, {type: "inside"}],
@@ -431,12 +432,12 @@ export  function PBPercentileChart(url, selectorName) {
     });
 }
 
-export  function ChangePercentileChart(url, selectorName) {
+export  function DailyChangePercentileChart(url, selectorName) {
     const chart = echarts.init(document.querySelector(selectorName));
     
     axios.get(url).then((res) => {
-        if (! res.data.chPercent) {
-            alert("未获取到[" + res.data.name + "]指数的涨跌幅");
+        if (!res.data.dailyChPercent) {
+            alert("未获取到[" + res.data.name + "]指数的日涨跌幅");
             return
         }
         // alert("res:" + res.data.roe);
@@ -483,7 +484,79 @@ export  function ChangePercentileChart(url, selectorName) {
             },
             series: [
                 {
-                    data: res.data.chPercent,
+                    data: res.data.dailyChPercent,
+                    type:"bar",
+                    symbol:"none",
+                    itemStyle: {
+                        normal:{
+                            color: "#0b2649",
+                            lineStyle: {
+                                width: 3
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+        // alert(options.title.text);
+        chart.setOption(options, true)
+    });
+}
+
+export  function YearChangePercentileChart(url, selectorName) {
+    const chart = echarts.init(document.querySelector(selectorName));
+    
+    axios.get(url).then((res) => {
+        // alert(res.data.yearChPercent);
+        if (res.data.errno) {
+            alert("未获取到[" + res.data.name + "]指数的年涨跌幅");
+            return
+        }
+        // alert("res:" + res.data.roe);
+        let options = {
+            title: {
+                text: res.data.name + "-年涨跌幅(%)",
+                left:"center",
+                top: 20,
+                // textAlign:"left"
+            },
+            xAxis: {
+                type: "category",
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick: optionsSettings.axis.xAxisTick,
+                axisLabel: {fontSize: 18},
+                data: res.data.date
+            },
+            yAxis: {
+                type: "value",
+                // interval:2,
+                axisLabel:{
+                    fontSize:18, 
+                    formatter: "{value} %"
+                },
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick:optionsSettings.axis.yAxisTick,
+                splitLine: optionsSettings.axis.yAxisSplitLine,
+            },
+            dataZoom: optionsSettings.dataZoom,
+            tooltip: optionsSettings.tooltip,
+            toolbox: optionsSettings.toolbox,
+            visualMap: {top: "middle",
+            right: 20,
+            pieces: [{
+                gt: 0,
+                color: '#CC0033 '
+            }, {
+                lt: 0,
+                color: '#339966 '
+            }, ],
+            // outOfRange: {
+            //     color: '#CC0033 '
+            // }
+            },
+            series: [
+                {
+                    data: res.data.yearChPercent,
                     type:"bar",
                     symbol:"none",
                     itemStyle: {
