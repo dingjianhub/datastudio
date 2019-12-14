@@ -487,6 +487,12 @@ export  function DailyChangePercentileChart(url, selectorName) {
                     data: res.data.dailyChPercent,
                     type:"bar",
                     symbol:"none",
+                    // label: {
+                    //     normal: {
+                    //         show: true,
+                    //         position: 'left'
+                    //     }
+                    // },
                     itemStyle: {
                         normal:{
                             color: "#0b2649",
@@ -559,6 +565,13 @@ export  function YearChangePercentileChart(url, selectorName) {
                     data: res.data.yearChPercent,
                     type:"bar",
                     symbol:"none",
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'inside',
+                            fontWeight:"bold"
+                        }
+                    },
                     itemStyle: {
                         normal:{
                             color: "#0b2649",
@@ -701,6 +714,12 @@ export  function TotalNorthMoney(url, queryString, selectorName) {
                     data: res.data.data_list,
                     type:"bar",
                     symbol:"none",
+                    // label: {
+                    //     normal: {
+                    //         show: true,
+                    //         position: 'top'
+                    //     }
+                    // },
                     itemStyle: {
                         normal:{
                             color: "#0b2649",
