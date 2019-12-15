@@ -40,7 +40,7 @@ export default {
     data() {
         return {
             indexCode: "399967",
-            baseurl: "http://127.0.0.1:5000/index/",
+            baseurl: "http://101.37.30.183:5000/index/",
             selectorName: ".military-index"
         }
     },
@@ -94,7 +94,7 @@ export default {
 .military-index {
     background: gainsboro;
     width: 80%;
-    height: 900px;
+    height: 493px;
     text-align: center;
     margin: 0 auto;
     float: left;

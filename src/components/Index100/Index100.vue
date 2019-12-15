@@ -41,8 +41,8 @@ import {
 export default {
     data() {
         return {
-            indexCode: "000903",
-            selectorName: ".index-100-detail",
+            baseurl:"http://101.37.30.183:5000/index/000903",
+            selectorName: ".index-100-detail"
             }
     },
     components:{
@@ -51,40 +51,40 @@ export default {
     },
     methods: {
         PE(){
-            const url = "http://127.0.0.1:5000/index/"+this.indexCode+"/pe";
+            const url = this.baseurl + "/pe";
             PEChart(url, this.selectorName)
         },
         PB(){
-            const url = "http://127.0.0.1:5000/index/"+this.indexCode+"/pb";
+            const url = this.baseurl + "/pb";
             PBChart(url, this.selectorName)
         },
         Price(){
-            const url = "http://127.0.0.1:5000/index/"+this.indexCode+"/price";
+            const url = this.baseurl + "/price";
             PriceChart(url, this.selectorName);
         },
         ROE(){
-            const url = "http://127.0.0.1:5000/index/"+this.indexCode+"/roe";
+            const url = this.baseurl +"/roe";
             ROEChart(url, this.selectorName);
         },
 
         PEPercentile(){
-            const url = "http://127.0.0.1:5000/index/"+this.indexCode+"/pe-percent";
+            const url = this.baseurl +"/pe-percent";
             PEPercentileChart(url, this.selectorName);
         },
         PBPercentile(){
-            const url = "http://127.0.0.1:5000/index/"+this.indexCode+"/pb-percent";
+            const url = this.baseurl +"/pb-percent";
             PBPercentileChart(url, this.selectorName);
         },
         dailyChangePercentile(){
-            const url = "http://127.0.0.1:5000/index/"+this.indexCode+"/daily-change-percent";
+            const url = this.baseurl +"/daily-change-percent";
             DailyChangePercentileChart(url, this.selectorName);
         },
         yearChangePercentile(){
-            const url = "http://127.0.0.1:5000/index/"+this.indexCode+"/year-change-percent";
+            const url = this.baseurl +"/year-change-percent";
             YearChangePercentileChart(url, this.selectorName);
         },
         TotalVolumes(){
-            const url = "http://127.0.0.1:5000/index/"+this.indexCode+"/volumes";
+            const url = this.baseurl +"/volumes";
             TotalVolumesChart(url, this.selectorName);
         }
     },  
@@ -96,7 +96,7 @@ export default {
 .index-100-detail {
     background: gainsboro;
     width: 80%;
-    height: 900px;
+    height: 493px;
     text-align: center;
     margin: 0 auto;
     float: left;

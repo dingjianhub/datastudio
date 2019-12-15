@@ -33,12 +33,7 @@
                 </a>
             </li>
         </ul>
-        <label class="index-group-content">温度指标</label>
-        <ul class="temperatures-index" >
-            <li class="temperatures-index-item"><a href="#/market-temperature" class="group-item-link">北向资金</a></li>
-            <li class="temperatures-index-item"><a href="#/market-temperature" class="group-item-link">市场成交量</a></li>
-            <li class="temperatures-index-item"><a href="#/market-temperature" class="group-item-link">新增投资者</a></li>
-        </ul>
+        <a href="#/market-temperature" class="temperatures-link">温度指标</a>
     </div>
 </template> 
 
@@ -53,7 +48,7 @@ export default {
             }
     },
     created(){
-        axios.get("http://127.0.0.1:5000/index/group").then((res) => {
+        axios.get("http://101.37.30.183:5000/index/group").then((res) => {
             this.lowIndex = res.data.lowIndex;
             this.midIndex = res.data.midIndex;
             this.highIndex = res.data.highIndex;
@@ -72,7 +67,7 @@ export default {
 }
 .index-group-content{
     /* background-color: #1e9407 */
-    font-size: 22px;
+    font-size: 18px;
     font-weight: bold;
 }
 .low-index-group{
@@ -81,7 +76,7 @@ export default {
 .low-index-group-item {
     border-bottom: 1px dotted #cfd2d5;
     cursor: pointer;
-    padding: 3px 0;
+    /* padding: 1px 0; */
 }
 .low-index-group-item:hover{
     background-color: #e4ecf6;
@@ -92,7 +87,7 @@ export default {
 .mid-index-group-item {
     border-bottom: 1px dotted #cfd2d5;
     cursor: pointer;
-    padding: 3px 0;
+    /* padding: 1px 0; */
 }
 .mid-index-group-item:hover{
     background-color: #e4ecf6;
@@ -103,36 +98,41 @@ export default {
 .high-index-group-item {
     border-bottom: 1px dotted #cfd2d5;
     cursor: pointer;
-    padding: 3px 0;
+    /* padding: 1px 0; */
 }
 .high-index-group-item:hover{
     background-color: #e4ecf6;
 }
-.temperatures-index {
+.temperatures-link {
+    display: block;
+    heigth: 30px;
+    line-height: 35px;
+    font-size:16px;
+    color: #000;
     background-color: #3a98afe7;
+    text-decoration: none;
 }
-.temperatures-index-item {
-    border-bottom: 1px dotted #cfd2d5;
-    cursor: pointer;
-    padding: 3px 0;
-}
-.temperatures-index-item:hover{
+
+.temperatures-link:hover {
+    font-weight: bold;
     background-color: #e4ecf6;
 }
+
+
 .group-item-link{
-    font-size: 18px;
+    font-size: 14px;
     text-decoration: none;
     color: #000;
     /* font-weight: bold; */
 }
 
 .group-item-link:hover{
-    /* font-size: 20px; */
+    /* font-size: 18px; */
     font-weight: bold;
 }
 
 .price-item {
-    font-size: 16px;
+    font-size: 12px;
 }
 
 

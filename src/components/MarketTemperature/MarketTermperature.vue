@@ -35,7 +35,7 @@ import {
 export default {
     data() {
         return {
-            baseurl: "http://127.0.0.1:5000/temperature/",
+            baseurl: "http://101.37.30.183:5000/temperature/",
             selectorName: ".market-temperature"}
     },
     components:{
@@ -88,7 +88,7 @@ export default {
 .market-temperature {
     background: gainsboro;
     width: 80%;
-    height: 800px;
+    height: 440px;
     text-align: center;
     margin: 0 auto;
     float: left;

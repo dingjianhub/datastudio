@@ -1,9 +1,9 @@
 .common-btn-item {
     display: block;
     width:100%;
-    height: 100px;
+    height: 55px;
     font-size: 20px;
-    padding: 20px 0;
+    padding: 9.5px 0;
     /* margin: 5px 0; */
     border: 1px dotted #b7c0b9;
     color: #0b2649

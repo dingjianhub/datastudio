@@ -39,7 +39,7 @@ export default {
     data() {
         return {
             indexCode: "399986", 
-            baseurl:"http://127.0.0.1:5000/index/",
+            baseurl:"http://101.37.30.183:5000/index/",
             selectorName: ".bank-index"
         }
     },
@@ -93,7 +93,7 @@ export default {
 .bank-index {
     background: gainsboro;
     width: 80%;
-    height: 900px;
+    height: 493px;
     text-align: center;
     margin: 0 auto;
     float: left;
