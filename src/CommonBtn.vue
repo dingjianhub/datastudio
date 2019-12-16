@@ -27,11 +27,7 @@ export default {
 </script>
 
 <style scoped>
-.common-btn {
-    /* margin-top: 100px; */
-    /* padding: 0 10px; */
 
-}
 .common-btn-item {
     display: block;
     width:100%;

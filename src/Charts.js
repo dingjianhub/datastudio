@@ -647,8 +647,80 @@ export  function TotalVolumesChart(url, selectorName) {
     });
 }
 
+export function ExpectedYeildChart(url, selectorName) {
+    // 指数预期收益率
+    const peChart = echarts.init(document.querySelector(selectorName));
+    axios.get(url).then((res) => {
+        // alert("res:" + res.data.data_list);
+        let options = {
+            title: {
+                text: res.data.name + "收益率 VS 中国十年期国债收益率",
+                left:"center",
+                top: 20,
+                // textAlign:"left"
+            },
+            legend: {
+                data: [res.data.name + "收益率", "中国十年期国债收益率"]
+            },
+            xAxis: {
+                type: "category",
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick: optionsSettings.axis.xAxisTick,
+                axisLabel: {fontSize: 18},
+                data: res.data.date
+            },
+            yAxis: {
+                type: "value",
+                axisLabel:{
+                    fontSize:18, 
+                    formatter: "{value}%"
+                },
+                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
+                axisTick:optionsSettings.axis.yAxisTick,
+                splitLine: optionsSettings.axis.yAxisSplitLine,
+            },
+            dataZoom: optionsSettings.dataZoom,
+            tooltip: optionsSettings.tooltip,
+            toolbox: optionsSettings.toolbox,
+            // visualMap: optionsSettings.visualMap,
+            series: [
+                {
+                    data: res.data.expected_yield,
+                    name: res.data.name + "收益率",
+                    type:"line",
+                    symbol:"none",
+                    itemStyle: {
+                        normal:{
+                            // color: "#0b2649",
+                            lineStyle: {
+                                width: 3
+                            }
+                        }
+                    }
+                },
+                {
+                    data: res.data.ten_year_yield,
+                    type:"line",
+                    symbol:"none",
+                    name: "中国十年期国债收益率",
+                    itemStyle: {
+                        normal:{
+                            // color: "#0b2649",
+                            lineStyle: {
+                                width: 3
+                            }
+                        }
+                    }
+                },
+            ]
+        }
+        // alert(options.title.text);
+        peChart.setOption(options, true)
+        
+    });
+}
 
-export  function TotalNorthMoney(url, queryString, selectorName) {
+export  function TotalNorthMoneyChart(url, queryString, selectorName) {
     // 指数的成交量
     
     const chart = echarts.init(document.querySelector(selectorName));
@@ -736,7 +808,7 @@ export  function TotalNorthMoney(url, queryString, selectorName) {
     });
 }
 
-export  function TotalMarketVolumes(url, selectorName) {
+export  function TotalMarketVolumesChart(url, selectorName) {
     // 指数的成交量
     const chart = echarts.init(document.querySelector(selectorName));
     
@@ -829,7 +901,7 @@ export  function TotalMarketVolumes(url, selectorName) {
     });
 }
 
-export function InvestorsCharts(url, selectorName) {
+export function InvestorsChart(url, selectorName) {
     // 指数的PE
     const peChart = echarts.init(document.querySelector(selectorName));
     
@@ -885,7 +957,7 @@ export function InvestorsCharts(url, selectorName) {
     });
 }
 
-export function ASharesValuesCharts(url, selectorName) {
+export function ASharesValuesChart(url, selectorName) {
     // A股流通市值
     const peChart = echarts.init(document.querySelector(selectorName));
     axios.get(url).then((res) => {
@@ -940,7 +1012,7 @@ export function ASharesValuesCharts(url, selectorName) {
     });
 }
 
-export function SHIndexCharts(url, selectorName) {
+export function SHIndexChart(url, selectorName) {
     // A股流通市值
     
     const peChart = echarts.init(document.querySelector(selectorName));
@@ -996,7 +1068,7 @@ export function SHIndexCharts(url, selectorName) {
     });
 }
 
-export function SZIndexCharts(url, selectorName) {
+export function SZIndexChart(url, selectorName) {
     // A股流通市值
     
     const peChart = echarts.init(document.querySelector(selectorName));
@@ -1100,79 +1172,6 @@ export function ChinaTenYearYieldChart(url, selectorName) {
                         }
                     }
                 }
-            ]
-        }
-        // alert(options.title.text);
-        peChart.setOption(options, true)
-        
-    });
-}
-
-export function ExpectedYeildChart(url, selectorName) {
-    // 指数预期收益率
-    const peChart = echarts.init(document.querySelector(selectorName));
-    axios.get(url).then((res) => {
-        // alert("res:" + res.data.data_list);
-        let options = {
-            title: {
-                text: res.data.name + "收益率 VS 中国十年期国债收益率",
-                left:"center",
-                top: 20,
-                // textAlign:"left"
-            },
-            legend: {
-                data: [res.data.name + "收益率", "中国十年期国债收益率"]
-            },
-            xAxis: {
-                type: "category",
-                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
-                axisTick: optionsSettings.axis.xAxisTick,
-                axisLabel: {fontSize: 18},
-                data: res.data.date
-            },
-            yAxis: {
-                type: "value",
-                axisLabel:{
-                    fontSize:18, 
-                    formatter: "{value}%"
-                },
-                axisLine:{lineStyle: optionsSettings.axis.lineStyle},
-                axisTick:optionsSettings.axis.yAxisTick,
-                splitLine: optionsSettings.axis.yAxisSplitLine,
-            },
-            dataZoom: optionsSettings.dataZoom,
-            tooltip: optionsSettings.tooltip,
-            toolbox: optionsSettings.toolbox,
-            // visualMap: optionsSettings.visualMap,
-            series: [
-                {
-                    data: res.data.expected_yield,
-                    name: res.data.name + "收益率",
-                    type:"line",
-                    symbol:"none",
-                    itemStyle: {
-                        normal:{
-                            // color: "#0b2649",
-                            lineStyle: {
-                                width: 3
-                            }
-                        }
-                    }
-                },
-                {
-                    data: res.data.ten_year_yield,
-                    type:"line",
-                    symbol:"none",
-                    name: "中国十年期国债收益率",
-                    itemStyle: {
-                        normal:{
-                            // color: "#0b2649",
-                            lineStyle: {
-                                width: 3
-                            }
-                        }
-                    }
-                },
             ]
         }
         // alert(options.title.text);

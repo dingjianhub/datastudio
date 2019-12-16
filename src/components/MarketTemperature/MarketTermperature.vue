@@ -24,12 +24,12 @@
 
 import Header from '../../Header';
 import {
-    TotalNorthMoney,
-    TotalMarketVolumes,
-    InvestorsCharts,
-    ASharesValuesCharts,
-    SHIndexCharts,
-    SZIndexCharts,
+    TotalNorthMoneyChart,
+    TotalMarketVolumesChart,
+    InvestorsChart,
+    ASharesValuesChart,
+    SHIndexChart,
+    SZIndexChart,
     ChinaTenYearYieldChart
 } from '../../Charts'
 
@@ -38,7 +38,9 @@ export default {
     data() {
         return {
             baseurl: "http://101.37.30.183:5000/temperature/",
-            selectorName: ".market-temperature"}
+            // baseurl: "http://127.0.0.1:5000/temperature/",
+            selectorName: ".market-temperature"
+        }
     },
     components:{
         Header,
@@ -47,39 +49,39 @@ export default {
     methods: {
         changeInvestors(){
             const url = this.baseurl + "investors";
-            InvestorsCharts(url, this.selectorName);
+            InvestorsChart(url, this.selectorName);
         },
         marketVolumes(){
             const url = this.baseurl + "market-volumes";
-            TotalMarketVolumes(url, this.selectorName);
+            TotalMarketVolumesChart(url, this.selectorName);
         },
         totals(){
             // const url = `${this.host}:${this.port}/norty-money`
             const url = this.baseurl + "north-money"
             const queryString = "?market=all"
-            TotalNorthMoney(url, queryString, this.selectorName);
+            TotalNorthMoneyChart(url, queryString, this.selectorName);
         },
         shStockExchange(){
             const url = this.baseurl + "north-money"
             const queryString = "?market=sh"
-            TotalNorthMoney(url, queryString, this.selectorName);
+            TotalNorthMoneyChart(url, queryString, this.selectorName);
         },
         szStockExchange(){
             const url = this.baseurl + "north-money"
             const queryString = "?market=sz"
-            TotalNorthMoney(url, queryString, this.selectorName);
+            TotalNorthMoneyChart(url, queryString, this.selectorName);
         },
         ASharesValues(){
             const url = this.baseurl + "a-shares-values";
-            ASharesValuesCharts(url, this.selectorName);
+            ASharesValuesChart(url, this.selectorName);
         },
         SHIndex(){
             const url = this.baseurl + "sh-index";
-            SHIndexCharts(url, this.selectorName)
+            SHIndexChart(url, this.selectorName)
         },
         SZIndex(){
             const url = this.baseurl + "sz-index";
-            SZIndexCharts(url, this.selectorName)
+            SZIndexChart(url, this.selectorName)
         },
         chinaTenYearYield(){
             const url = this.baseurl + "ten-year-yield";
