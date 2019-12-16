@@ -12,6 +12,7 @@
             <button class="common-btn-item" @click="ASharesValues">A股市值</button>
             <button class="common-btn-item" @click="SHIndex">上证指数</button>
             <button class="common-btn-item" @click="SZIndex">深证指数</button>
+            <button class="common-btn-item" @click="chinaTenYearYield">中国十年期国债收益率</button>
         </div>
         
         <hr>
@@ -29,6 +30,7 @@ import {
     ASharesValuesCharts,
     SHIndexCharts,
     SZIndexCharts,
+    ChinaTenYearYieldChart
 } from '../../Charts'
 
 
@@ -79,6 +81,10 @@ export default {
             const url = this.baseurl + "sz-index";
             SZIndexCharts(url, this.selectorName)
         },
+        chinaTenYearYield(){
+            const url = this.baseurl + "ten-year-yield";
+            ChinaTenYearYieldChart(url, this.selectorName)
+        }
 
     }
 }
@@ -88,7 +94,7 @@ export default {
 .market-temperature {
     background: gainsboro;
     width: 80%;
-    height: 440px;
+    height: 493px;
     text-align: center;
     margin: 0 auto;
     float: left;

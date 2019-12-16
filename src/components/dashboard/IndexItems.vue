@@ -48,7 +48,7 @@ export default {
             }
     },
     created(){
-        axios.get("http://101.37.30.183:5000/index/group").then((res) => {
+        axios.get("http://127.0.0.1:5000/index/group").then((res) => {
             this.lowIndex = res.data.lowIndex;
             this.midIndex = res.data.midIndex;
             this.highIndex = res.data.highIndex;
@@ -105,7 +105,7 @@ export default {
 }
 .temperatures-link {
     display: block;
-    heigth: 30px;
+    height: 30px;
     line-height: 35px;
     font-size:16px;
     color: #000;

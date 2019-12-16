@@ -34,6 +34,22 @@ def SZIndex():
     }
     return jsonify(response_dict)
 
+@temperature_index_bp.route("/ten-year-yield")
+def TenYearYield():
+    """中国十年期国债收益率"""
+    filename="/home/ay/workspace/datastudio/datas/中国十年期国债收益率.csv"
+    df = pd.read_csv(filename)
+    date = df["日期"].to_list()[::-1]
+    data_list = df["收盘"].to_list()[::-1]
+    
+    response_dict = {
+        "errno":response_code.success, 
+        "errmsg":"获取成功",
+        "date": date,
+        "data_list": data_list
+    }
+    return jsonify(response_dict)
+
 @temperature_index_bp.route("/investors")
 def change_investors():
     """新增投资者数量"""

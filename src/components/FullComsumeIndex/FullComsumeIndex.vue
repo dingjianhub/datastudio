@@ -13,6 +13,7 @@
             <button class="common-btn-item" @click="dailyChangePercentile">日涨跌幅</button>
             <button class="common-btn-item" @click="yearChangePercentile">年涨跌幅</button>
             <button class="common-btn-item" @click="TotalVolumes">成交量</button>
+            <button class="common-btn-item" @click="PERate">预期收益率</button>
         </div>
         
         <hr>
@@ -35,13 +36,15 @@ import {
     DailyChangePercentileChart,
     YearChangePercentileChart,
     TotalVolumesChart,
+    ExpectedYeildChart
 } from '../../Charts';
 
 export default {
     data() {
         return {
             indexCode: "000989",
-            baseurl: "http://101.37.30.183:5000/index/",
+            baseurl:"http://101.37.30.183:5000/index/",
+            // baseurl:"http://127.0.0.1:5000/index/",
             selectorName: ".full-comsume-index"
         }
     },
@@ -86,8 +89,12 @@ export default {
         TotalVolumes(){
             const url = this.baseurl+this.indexCode+"/volumes";
             TotalVolumesChart(url, this.selectorName);
+        },
+        PERate(){
+            const url = this.baseurl+this.indexCode+"/expected-yeild";
+            ExpectedYeildChart(url, this.selectorName); 
         }
-    },  
+    },
 }
 </script>
 
@@ -95,7 +102,7 @@ export default {
 .full-comsume-index {
     background: gainsboro;
     width: 80%;
-    height: 493px;
+    height: 548px;
     text-align: center;
     margin: 0 auto;
     float: left;

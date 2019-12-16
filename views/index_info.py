@@ -101,6 +101,31 @@ def index_year_change_percent(index_code):
     }
     return jsonify(response_dict)
 
+@index_info_bp.route("/<string:index_code>/expected-yeild")
+def index_expected_yeild(index_code):
+    col_name = "当前PE"
+    index_name, pe_date_list, data_list = read_datas(index_code, col_name)
+    pe_reciprocal_list = []
+    for item in data_list:
+        pe_reciprocal_list.append((1 / item) * 100)
+
+    filename="/home/ay/workspace/datastudio/datas/中国十年期国债收益率.csv"
+    df = pd.read_csv(filename)
+    ten_year_date_list = df["日期"].to_list()[::-1]
+    ten_year_data_list = df["收盘"].to_list()[::-1]
+    diff_cnt = len(ten_year_date_list) - len(pe_date_list)
+    ten_year_results = []
+    for i in range(diff_cnt):
+        ten_year_results.append(ten_year_data_list[i])
+
+    return jsonify(
+        errno=response_code.success, 
+        errmsg="获取成功", 
+        name=index_name, 
+        date=pe_date_list, 
+        expected_yield=pe_reciprocal_list,
+        ten_year_yield=ten_year_results
+        )
 
 @index_info_bp.route("/<string:index_code>/volumes")
 def index_total_volumes(index_code):
