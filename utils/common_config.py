@@ -1,6 +1,6 @@
 class Config(object):
     def __init__(self):
-        self.sign = "1576239504672BCA0B16D6422F2E57124AA6B235FE449"
+        self.sign = "15765906393936462B77AD86A0B33558672FDA33CBD15"
         self.token = "70f12f2f4f091e459a279469fe49eca5"
 
     def get_sign(self):
