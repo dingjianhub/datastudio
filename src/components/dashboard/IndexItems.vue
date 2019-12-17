@@ -48,7 +48,8 @@ export default {
             }
     },
     created(){
-        axios.get("http://127.0.0.1:5000/index/group").then((res) => {
+        let url = "http://127.0.0.1:5000/index/group";
+        axios.get(url).then((res) => {
             this.lowIndex = res.data.lowIndex;
             this.midIndex = res.data.midIndex;
             this.highIndex = res.data.highIndex;

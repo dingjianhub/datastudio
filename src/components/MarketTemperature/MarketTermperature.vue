@@ -37,8 +37,7 @@ import {
 export default {
     data() {
         return {
-            baseurl: "http://101.37.30.183:5000/temperature/",
-            // baseurl: "http://127.0.0.1:5000/temperature/",
+            baseurl: "http://127.0.0.1:5000/temperature/",
             selectorName: ".market-temperature"
         }
     },

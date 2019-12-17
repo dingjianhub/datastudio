@@ -43,8 +43,7 @@ export default {
     data() {
         return {
             indexCode: "000989",
-            baseurl:"http://101.37.30.183:5000/index/",
-            // baseurl:"http://127.0.0.1:5000/index/",
+            baseurl:"http://127.0.0.1:5000/index/",
             selectorName: ".full-comsume-index"
         }
     },
