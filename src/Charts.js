@@ -909,7 +909,7 @@ export function InvestorsChart(url, selectorName) {
         // alert("res:" + res);
         let options = {
             title: {
-                text: "投资者数量变化",
+                text: "新增投资者数量变化",
                 left:"center",
                 top: 20,
                 // textAlign:"left"
